@@ -1,0 +1,15 @@
+digraph G {
+g [ label= << current->data << ];
+c [ label= << current->data << ];
+a [ label= << current->data << ];
+b [ label= << current->data << ];
+c -> b;
+c -> a;
+f [ label= << current->data << ];
+d [ label= << current->data << ];
+e [ label= << current->data << ];
+f -> e;
+f -> d;
+g -> f;
+g -> c;
+}

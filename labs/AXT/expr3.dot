@@ -1,0 +1,27 @@
+digraph G {
+m [ label= << current->data << ];
+e [ label= << current->data << ];
+a [ label= << current->data << ];
+d [ label= << current->data << ];
+b [ label= << current->data << ];
+c [ label= << current->data << ];
+d -> c;
+d -> b;
+e -> d;
+e -> a;
+l [ label= << current->data << ];
+j [ label= << current->data << ];
+h [ label= << current->data << ];
+f [ label= << current->data << ];
+g [ label= << current->data << ];
+h -> g;
+h -> f;
+i [ label= << current->data << ];
+j -> i;
+j -> h;
+k [ label= << current->data << ];
+l -> k;
+l -> j;
+m -> l;
+m -> e;
+}
