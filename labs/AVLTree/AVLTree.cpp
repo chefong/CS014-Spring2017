@@ -7,6 +7,9 @@ using namespace std;
 void AVLTree::insert(const string & userWord){
     //creates a new Node to insert
     Node* treeNode = new Node(userWord);
+    Node* n = 0;
+    Node* nPar = 0;
+    n = root;
 
     if (root == 0) {
         root = treeNode;
@@ -17,10 +20,6 @@ void AVLTree::insert(const string & userWord){
     if (search(userWord)) { //return if word exists
         return;
     }
-
-    Node* n;
-    n = root;
-    Node* nPar;
 
     while (n) { //locates where to insert
         nPar = n;
@@ -45,7 +44,6 @@ void AVLTree::insert(const string & userWord){
         rotate(findUnbalancedNode(treeNode));
         rebalance(root);
     }
-
 }
 
 int AVLTree::balanceFactor(Node* current){
@@ -60,14 +58,14 @@ int AVLTree::balanceFactor(Node* current){
         left = -1;
     }
     else {
-        left = height(current->left);
+        left = height(current->left); //gets the height of the left subtree
     }
 
     if (current->right == 0){ //gets right's height
         right = -1;
     }
     else {
-        right = height(current->right);
+        right = height(current->right); //gets the height of the right subtree
     }
 
     return left - right;
@@ -190,28 +188,29 @@ void AVLTree::printBalanceFactors(Node* n){
 
 void AVLTree::visualizeTree(const string &outputFilename){
     ofstream outFS(outputFilename.c_str());
-    if (!outFS.is_open()) {
+    if(!outFS.is_open()){
         cout<<"Error"<<endl;
         return;
     }
     outFS<<"digraph G {"<<endl;
     visualizeTree(outFS,root);
-    outFS << "}";
+    outFS<<"}";
     outFS.close();
     string jpgFilename = outputFilename.substr(0,outputFilename.size()-4)+".jpg";
     string command = "dot -Tjpg " + outputFilename + " -o " + jpgFilename;
     system(command.c_str());
 }
 
-void AVLTree::visualizeTree(ofstream & outFS, Node *n) {
-    if (n) {
-        if (n->left) {
-            visualizeTree(outFS, n->left);
-            outFS<< n->data << " -> " << n->left->data << ";" << endl;    
+void AVLTree::visualizeTree(ofstream & outFS, Node *n){
+    if(n){
+        if(n->left){
+            visualizeTree(outFS,n->left);
+            outFS<<n->data <<" -> " <<n->left->data<<";"<<endl;    
         }
-        else if (n->right) {
-            visualizeTree(outFS, n->right);
-            outFS<<n->data << " -> " << n->right->data << ";" << endl;    
+
+        if(n->right){
+            visualizeTree(outFS,n->right);
+            outFS<<n->data <<" -> " <<n->right->data<<";"<<endl;    
         }
     }
 }

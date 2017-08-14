@@ -39,11 +39,11 @@ int main( ) {
 
     } else if (choice == 2) {
       tree.printBalanceFactors();
-
-    } 
+    }
     //fix buffer just in case non-numeric choice entered
     choice = menu();
   }
+  tree.visualizeTree("output.jpg");
 
   return 0;
 }

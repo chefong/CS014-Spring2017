@@ -23,10 +23,10 @@ void Heap::enqueue(PrintJob* current) {
 
 void Heap::dequeue() {
 	if ((numItems > 2 && arr[1]->getPriority() < arr[numItems - 1]->getPriority()) && (arr[2]->getPriority() < arr[numItems - 1]->getPriority())) {
-		arr[0] = arr[numItems-1];
+		arr[0] = arr[numItems-1]; //if item can be placed in hole without violation of the heap property, then done
 		--numItems;
 	}
-	else {
+	else { //trickle down if heap property is violated
 		trickleDown(0);
 		--numItems;
 	}
@@ -46,19 +46,19 @@ void Heap::print() {
 		 << endl; 
 }
 
-void Heap::trickleDown(int num) {   
-    if (((2 * num + 1) < numItems) && ((2 * num + 2) < numItems)) { //if both children exist  
-        if (arr[2 * num + 1]->getPriority() > arr[2 * num + 2]->getPriority()) {//if left > right
-            arr[num] = arr[2 * num + 1];
-            trickleDown(2 * num + 1);
+void Heap::trickleDown(int i) {   
+    if (((2 * i + 1) < numItems) && ((2 * i + 2) < numItems)) { //if both children exist  
+        if (arr[2 * i + 1]->getPriority() > arr[2 * i + 2]->getPriority()) {//if left > right, assign passed in index to left and trickle
+            arr[i] = arr[2 * i + 1];
+            trickleDown(2 * i + 1);
         }
-        else { //if right > left
-            arr[num] = arr[2 * num + 2];
-            trickleDown(2 * num + 2);
+        else { //if right > left, assign passed in index to right and trickle
+            arr[i] = arr[2 * i + 2];
+            trickleDown(2 * i + 2);
         }
     }
-    else if (((2 * num + 1) < numItems)) { //if ONLY left exists
-        arr[num] = arr[2 * num + 1];
+    else if (((2 * i + 1) < numItems)) { //if ONLY left exists
+        arr[i] = arr[2 * i + 1];
     }
 
     return;
